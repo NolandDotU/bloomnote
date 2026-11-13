@@ -11,7 +11,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return (
     <main className="grid min-h-screen place-items-center bg-[#e8dfcf] px-6 text-[#2e3028]">
       <form action={login} className="w-full max-w-sm space-y-4 rounded-lg border border-[#b9aa91] bg-[#f7f1e7] p-6 shadow-[4px_6px_0_#c7bca9]">
-        <h1 className="font-serif text-2xl">Bloomnote studio</h1>
+        <h1 className="font-serif text-2xl">Adminnya Nolan aja brok</h1>
         <label className="block">
           <span className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-[#716957]">Password</span>
           <input name="password" type="password" required autoFocus className="mt-1 w-full rounded border border-[#b9aa91] bg-[#fffdf8] px-3 py-2 text-sm" />
