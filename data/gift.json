@@ -1,0 +1,131 @@
+{
+  "id": "seed-gift",
+  "slug": "demo-bloom",
+  "opening": "notebook",
+  "lock": {
+    "kind": "none"
+  },
+  "world": "night-garden",
+  "letter": {
+    "title": "For my Thaathaa",
+    "body": "Thaathaa, I gathered a few little memories for you: photos, a song, and this note for whenever you need a gentle reminder that you are loved. Thank you for always being patient with me, even when I make your mood bad. I hope this small world makes you smile, sayaangg.",
+    "signature": "Byy, sayaangg"
+  },
+  "bouquet": {
+    "photos": [
+      {
+        "id": "photo-1",
+        "url": "/foto/photo_1_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-2",
+        "url": "/foto/photo_2_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-3",
+        "url": "/foto/photo_3_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-4",
+        "url": "/foto/photo_4_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-5",
+        "url": "/foto/photo_5_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-6",
+        "url": "/foto/photo_6_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-7",
+        "url": "/foto/photo_7_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-8",
+        "url": "/foto/photo_8_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-9",
+        "url": "/foto/photo_9_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-10",
+        "url": "/foto/photo_10_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-11",
+        "url": "/foto/photo_11_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      },
+      {
+        "id": "photo-12",
+        "url": "/foto/photo_12_2026-11-11_21-18-33.jpg",
+        "caption": "A memory kept close",
+        "takenAt": null
+      }
+    ]
+  },
+  "songs": [
+    {
+      "id": "song-1",
+      "url": "/music/thaathaa.mp3",
+      "title": "For Thaathaa",
+      "artist": "Bloomnote sessions"
+    }
+  ],
+  "videos": [
+    {
+      "id": "video-1",
+      "url": "/video/for-thaathaa.mp4",
+      "title": "A little film for you"
+    }
+  ],
+  "voice": null,
+  "pins": [
+    {
+      "id": "seed-pin-1",
+      "lat": -6.1754,
+      "lng": 106.8272,
+      "title": "Where the city hums"
+    }
+  ],
+  "createdAt": "2025-04-12T10:00:00.000Z",
+  "copy": {
+    "heroKicker": "Bloomnote / private collection",
+    "heroTitle": "A little world, kept close",
+    "heroAside": "A catalogue of\r\ntender things",
+    "volume": "Vol. 01 · 2026",
+    "dedication": "For Thaathaa",
+    "galleryHeading": "Plate studies",
+    "editorLabel": "Editor's note / 01",
+    "keepsakesLabel": "Index of keepsakes",
+    "coordinatesLabel": "03 / Coordinates",
+    "footerLeft": "Made with care",
+    "footerRight": "Turn the page slowly",
+    "coverImage": "/elements/notebook-cover.png",
+    "vinylImage": "/elements/spinningVinyl.png",
+    "songCover": ""
+  }
+}

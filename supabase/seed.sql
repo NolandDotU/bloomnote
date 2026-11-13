@@ -1,0 +1,2 @@
+-- Use the built-in /g/demo-bloom seed while developing locally.
+-- Production seed data should be inserted through an authenticated owner after migration.

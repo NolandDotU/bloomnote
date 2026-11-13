@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@source "../";
+
+:root {
+  --ink: #24352f;
+  --cream: #f7f1e7;
+  --sage: #b7c8b3;
+  --petal: #e7a5a1;
+  --night: #172a3a;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--cream); }
+body { margin: 0; color: var(--ink); background: var(--cream); font-family: Arial, sans-serif; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible { outline: 3px solid #d67d72; outline-offset: 4px; }
+.paper-grain { background-image: url("/textures/paper-grain.svg"); }
+.paper-texture { background-image: url("/textures/paperTexture.png"); background-size: cover; background-position: center; }
+
+@keyframes vinyl-spin { to { transform: rotate(360deg); } }
+
+/* 24px hit area, 4px visual track — thumb was invisible with appearance-none */
+.song-range { -webkit-appearance: none; appearance: none; height: 24px; background: transparent; }
+.song-range::-webkit-slider-runnable-track { height: 4px; border-radius: 999px; background: var(--track, #d9cdbd); }
+.song-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: -5px; border-radius: 999px; background: #9b5b4e; border: 2px solid #f5efe3; }
+.song-range::-moz-range-track { height: 4px; border-radius: 999px; background: var(--track, #d9cdbd); }
+.song-range::-moz-range-thumb { width: 14px; height: 14px; border-radius: 999px; background: #9b5b4e; border: 2px solid #f5efe3; }
+.song-range:disabled::-webkit-slider-thumb { background: #b9aa91; }
+.song-range:disabled::-moz-range-thumb { background: #b9aa91; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
