@@ -38,6 +38,10 @@ function refresh() {
   revalidatePath("/admin");
 }
 
+function done(status: "saved" | "uploaded" | "removed"): never {
+  redirect(`/admin?status=${status}`);
+}
+
 async function guard() {
   if (!(await isAdmin())) redirect("/admin/login");
 }
@@ -100,12 +104,20 @@ export async function saveGift(formData: FormData) {
 
   await writeContent(next);
   refresh();
+  done("saved");
 }
 
 export async function uploadAsset(formData: FormData) {
   await guard();
   const kind = String(formData.get("kind") ?? "");
-  const url = await saveUpload(formData.get("file") as File | null);
+  if (!["photo", "video", "song", "cover", "vinyl", "songCover"].includes(kind)) {
+    throw new Error("Unsupported upload type.");
+  }
+  const file = formData.get("file");
+  if (!(file instanceof File) || !file.size) {
+    throw new Error("Choose a file before uploading.");
+  }
+  const url = await saveUpload(file);
   if (!url) return;
 
   const current = await readContent();
@@ -127,6 +139,7 @@ export async function uploadAsset(formData: FormData) {
 
   await writeContent(next);
   refresh();
+  done("uploaded");
 }
 
 export async function removeAsset(formData: FormData) {
@@ -142,4 +155,5 @@ export async function removeAsset(formData: FormData) {
 
   await writeContent(next);
   refresh();
+  done("removed");
 }

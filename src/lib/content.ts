@@ -54,7 +54,8 @@ function merge(parsed: Partial<GiftContent>): GiftContent {
 export async function readContent(): Promise<GiftContent> {
   const supabase = getAdminClient();
   if (supabase) {
-    const { data } = await supabase.from("gift_content").select("data").eq("id", ROW_ID).maybeSingle();
+    const { data, error } = await supabase.from("gift_content").select("data").eq("id", ROW_ID).maybeSingle();
+    if (error) throw new Error(`Content load failed: ${error.message}`);
     if (data?.data) return merge(data.data as Partial<GiftContent>);
     return defaultContent();
   }

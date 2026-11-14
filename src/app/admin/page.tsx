@@ -24,9 +24,15 @@ function Text({ name, title, value, area }: { name: string; title: string; value
   );
 }
 
-export default async function AdminPage() {
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
   if (!(await isAdmin())) redirect("/admin/login");
   const gift = await readContent();
+  const { status } = await searchParams;
+  const message =
+    status === "saved" ? "All changes saved." :
+    status === "uploaded" ? "Media uploaded and added." :
+    status === "removed" ? "Media removed." :
+    null;
 
   return (
     <main className="min-h-screen bg-[#e8dfcf] px-4 py-8 text-[#2e3028] md:px-10">
@@ -43,6 +49,12 @@ export default async function AdminPage() {
             </form>
           </div>
         </header>
+
+        {message && (
+          <p role="status" className="rounded border border-[#82956f] bg-[#edf3e6] px-4 py-3 text-sm text-[#49603d]">
+            {message}
+          </p>
+        )}
 
         <form action={saveGift} className="space-y-6">
           <section className={card}>
@@ -120,7 +132,7 @@ export default async function AdminPage() {
             </div>
           </section>
 
-          <button type="submit" className={btn}>Save all changes</button>
+          <button type="submit" className={`${btn} w-full sm:w-auto`}>Save all changes</button>
         </form>
 
         <section className={card}>
