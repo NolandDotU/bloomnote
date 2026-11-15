@@ -396,6 +396,11 @@ export function GiftViewer({ gift }: { gift: PublicGift & { copy: GiftCopy } }) 
                     <span>{gift.bouquet.photos.length} photographs</span>
                   </div>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3">
+                    {gift.bouquet.photos.length === 0 && (
+                      <p className="col-span-full rounded border border-dashed border-[#b9aa91] px-4 py-8 text-center text-sm text-[#716957]">
+                        No photographs yet. Add them in the studio.
+                      </p>
+                    )}
                     {gift.bouquet.photos.map((photo, index) => (
                       <motion.figure key={photo.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.08 }} className="group">
                         <motion.button drag={canDrag && !reduceMotion} whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }} onClick={() => setSelectedPhoto(photo)} className="relative block aspect-[4/5] w-full touch-manipulation overflow-hidden border-[7px] border-[#f5efe3] bg-[#f5efe3] shadow-[0_2px_0_#a99d87,3px_6px_12px_rgba(70,60,45,.16)]" aria-label={`Open photo: ${photo.caption}`}>
@@ -417,11 +422,17 @@ export function GiftViewer({ gift }: { gift: PublicGift & { copy: GiftCopy } }) 
                   <div className="mt-9 border-t border-[#b9aa91] pt-5">
                     <p className="mb-3 text-[11px] font-semibold tracking-[0.12em] text-[#716957] md:text-[10px]">{copy.keepsakesLabel}</p>
                     <div className="space-y-2 text-sm text-[#595649]">
-                      <LocalSongPlayer title={gift.songs[0]?.title ?? "A song for you"} artist={gift.songs[0]?.artist ?? "Bloomnote sessions"} url={gift.songs[0]?.url ?? ""} cover={copy.songCover || gift.bouquet.photos[0]?.url} vinyl={copy.vinylImage} />
+                      {gift.songs[0] ? (
+                        <LocalSongPlayer title={gift.songs[0].title} artist={gift.songs[0].artist} url={gift.songs[0].url} cover={copy.songCover || gift.bouquet.photos[0]?.url} vinyl={copy.vinylImage} />
+                      ) : (
+                        <p className="border-b border-dotted border-[#b9aa91] pb-4 text-[#716957]">A song is on its way.</p>
+                      )}
                       {gift.pins.length > 0 && <span className="flex justify-between"><span>{copy.coordinatesLabel}</span><span>{gift.pins[0].title}</span></span>}
                     </div>
                   </div>
-                  {gift.videos[0] && <VideoKeepsake title={gift.videos[0].title} url={gift.videos[0].url} poster={gift.videos[0].poster ?? gift.bouquet.photos[0]?.url} />}
+                  {gift.videos.map((video) => (
+                    <VideoKeepsake key={video.id} title={video.title} url={video.url} poster={video.poster ?? gift.bouquet.photos[0]?.url} />
+                  ))}
                 </article>
               </div>
               <footer className="mt-10 flex justify-between border-t border-[#8d806c]/60 pt-3 pb-5 text-[11px] tracking-[0.12em] text-[#716957] md:text-[10px]">

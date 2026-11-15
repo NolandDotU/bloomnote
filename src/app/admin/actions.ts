@@ -42,6 +42,10 @@ function done(status: "saved" | "uploaded" | "removed"): never {
   redirect(`/admin?status=${status}`);
 }
 
+function fail(message: string): never {
+  redirect(`/admin?status=error&message=${encodeURIComponent(message)}`);
+}
+
 async function guard() {
   if (!(await isAdmin())) redirect("/admin/login");
 }
@@ -106,19 +110,23 @@ export async function saveGift(formData: FormData) {
   refresh();
   done("saved");
 }
-
 export async function uploadAsset(formData: FormData) {
   await guard();
   const kind = String(formData.get("kind") ?? "");
   if (!["photo", "video", "song", "cover", "vinyl", "songCover"].includes(kind)) {
-    throw new Error("Unsupported upload type.");
+    fail("Unsupported upload type.");
   }
   const file = formData.get("file");
   if (!(file instanceof File) || !file.size) {
-    throw new Error("Choose a file before uploading.");
+    fail("Choose a file before uploading.");
   }
-  const url = await saveUpload(file);
-  if (!url) return;
+  let url: string | null = null;
+  try {
+    url = await saveUpload(file);
+  } catch (error) {
+    fail(error instanceof Error ? error.message : "Upload failed.");
+  }
+  if (!url) fail("Upload failed.");
 
   const current = await readContent();
   const next: GiftContent = { ...current };

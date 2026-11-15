@@ -24,14 +24,15 @@ function Text({ name, title, value, area }: { name: string; title: string; value
   );
 }
 
-export default async function AdminPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ status?: string; message?: string }> }) {
   if (!(await isAdmin())) redirect("/admin/login");
   const gift = await readContent();
-  const { status } = await searchParams;
-  const message =
-    status === "saved" ? "All changes saved." :
-    status === "uploaded" ? "Media uploaded and added." :
-    status === "removed" ? "Media removed." :
+  const { status, message } = await searchParams;
+  const notice =
+    status === "saved" ? { tone: "ok" as const, text: "All changes saved." } :
+    status === "uploaded" ? { tone: "ok" as const, text: "Media uploaded and added." } :
+    status === "removed" ? { tone: "ok" as const, text: "Media removed." } :
+    status === "error" ? { tone: "bad" as const, text: message || "Something went wrong." } :
     null;
 
   return (
@@ -50,9 +51,16 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           </div>
         </header>
 
-        {message && (
-          <p role="status" className="rounded border border-[#82956f] bg-[#edf3e6] px-4 py-3 text-sm text-[#49603d]">
-            {message}
+        {notice && (
+          <p
+            role="status"
+            className={
+              notice.tone === "ok"
+                ? "rounded border border-[#82956f] bg-[#edf3e6] px-4 py-3 text-sm text-[#49603d]"
+                : "rounded border border-[#9b5b4e] bg-[#f7e7e3] px-4 py-3 text-sm text-[#8a3f33]"
+            }
+          >
+            {notice.text}
           </p>
         )}
 
@@ -86,6 +94,11 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <section className={card}>
             <h2 className="mb-4 font-serif text-xl">Photos</h2>
             <div className="space-y-3">
+              {gift.bouquet.photos.length === 0 && (
+                <p className="rounded border border-dashed border-[#b9aa91] px-4 py-6 text-center text-sm text-[#716957]">
+                  No photos yet. Upload one below.
+                </p>
+              )}
               {gift.bouquet.photos.map((photo) => (
                 <div key={photo.id} className="flex flex-wrap items-end gap-3 border-b border-dotted border-[#b9aa91] pb-3">
                   <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded border border-[#b9aa91]">
@@ -105,6 +118,11 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <section className={card}>
             <h2 className="mb-4 font-serif text-xl">Songs</h2>
             <div className="space-y-3">
+              {gift.songs.length === 0 && (
+                <p className="rounded border border-dashed border-[#b9aa91] px-4 py-6 text-center text-sm text-[#716957]">
+                  No songs yet. Upload one below.
+                </p>
+              )}
               {gift.songs.map((song) => (
                 <div key={song.id} className="grid gap-3 border-b border-dotted border-[#b9aa91] pb-3 sm:grid-cols-2">
                   <Text name={`songTitle-${song.id}`} title="Song title" value={song.title} />
@@ -117,6 +135,11 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <section className={card}>
             <h2 className="mb-4 font-serif text-xl">Videos</h2>
             <div className="space-y-3">
+              {gift.videos.length === 0 && (
+                <p className="rounded border border-dashed border-[#b9aa91] px-4 py-6 text-center text-sm text-[#716957]">
+                  No videos yet. Upload one below.
+                </p>
+              )}
               {gift.videos.map((video) => (
                 <Text key={video.id} name={`videoTitle-${video.id}`} title="Video title" value={video.title} />
               ))}
